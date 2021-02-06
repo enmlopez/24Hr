@@ -10,7 +10,7 @@ namespace _24Hr.Models
     public class CommentCreate
     {
         public int PostID { get; set; }
-
+         
         [MaxLength(500)]
         public string Text { get; set; }
     }

@@ -20,7 +20,7 @@ namespace _24Hr.Services
         }
 
 
-
+         
         public bool CreateComment(CommentCreate model)
         {
             var post = postService.GetPostById(model.PostID);
@@ -39,10 +39,6 @@ namespace _24Hr.Services
             using (var ctx = new ApplicationDbContext())
             {
                 
-
-                post.Comment.Add(entity);
-                ctx.SaveChanges();
-
                 ctx.Comments.Add(entity);
                 return ctx.SaveChanges() >= 1;
             }
@@ -91,6 +87,65 @@ namespace _24Hr.Services
                     };
             }
         }
+
+
+        public bool UpdateComment(CommentEdit comment,int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+
+                var entity =
+                    ctx
+                        .Comments
+                        .SingleOrDefault(e => e.Id == id && e.Author == _userId);
+                if (entity == null)
+                    return false;
+
+
+                entity.Text = comment.Text;
+
+                return ctx.SaveChanges() >= 1;
+
+            }
+
+        }
+
+
+        public bool DeleteComment(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+
+
+
+                var entity =
+                    ctx
+                        .Comments
+                        .SingleOrDefault(e => e.Id == id && e.Author == _userId);
+                if (entity == null)
+                    return false;
+
+
+
+                //remove replies if any
+                if (entity.Reply.Count > 0)
+                {
+
+                    ctx.Replies.RemoveRange(entity.Reply);
+                    ctx.SaveChanges();
+                }
+
+                ctx.Comments.Remove(entity);
+                return ctx.SaveChanges() >= 1;
+
+            }
+        }
+
+
+
+
+
+
 
 
 

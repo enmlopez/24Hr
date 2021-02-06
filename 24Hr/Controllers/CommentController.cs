@@ -22,7 +22,7 @@ namespace _24Hr.Controllers
             return commentService;
         }
 
-
+         
         [HttpPost]
         public IHttpActionResult CreateComment(CommentCreate comment)
         {
@@ -57,6 +57,27 @@ namespace _24Hr.Controllers
             if (comment != null)
                 return Ok(comment);
             return BadRequest("Could not find comment");
+        }
+
+
+        [HttpPut]
+        public IHttpActionResult UpdateComment(CommentEdit newComment, int id)
+        {
+            CommentService commentService = CreateCommentService();
+            var updated = commentService.UpdateComment(newComment, id);
+            if (updated)
+                return Ok();
+            return BadRequest("Could not update comment");
+        }
+
+        [HttpDelete]
+        public IHttpActionResult DeleteComment(int id)
+        {
+            CommentService commentService = CreateCommentService();
+            var deleted = commentService.DeleteComment(id);
+            if (deleted)
+                return Ok();
+            return BadRequest("Could not remove comment");
         }
     }
 }
