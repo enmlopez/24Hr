@@ -45,6 +45,27 @@ namespace _24Hr.Controllers
             var noteService = new ReplyService(userId);
             return noteService;
         }
+        public IHttpActionResult Put(ReplyEdit reply)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var service = CreateNoteService();
+
+            if (!service.UpdateReply(reply))
+                return InternalServerError();
+
+            return Ok();
+        }
+        public IHttpActionResult Delete(int id)
+        {
+            var service = CreateReplyService();
+
+            if (!service.DeleteReply(id))
+                return InternalServerError();
+
+            return Ok();
+        }
     }
     
 }

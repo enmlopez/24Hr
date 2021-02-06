@@ -59,6 +59,8 @@
     <Compile Include="PostDetail.cs" />
     <Compile Include="PostListItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReplyDetail.cs" />
+    <Compile Include="ReplyEdit.cs" />
     <Compile Include="ReplyListItems.cs" />
   </ItemGroup>
   <ItemGroup>
