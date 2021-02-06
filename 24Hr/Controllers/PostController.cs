@@ -41,12 +41,23 @@ namespace _24Hr.Controllers
             }
             return Ok();
         }
+
         [HttpGet]
         public IHttpActionResult Get(int id)
         {
             PostService postService = CreatePostService();
             var post = postService.GetPostById(id);
             return Ok(post);
+        }
+        [HttpDelete]
+        public IHttpActionResult Delete(int id)
+        {
+            var service = CreatePostService();
+            if (!service.DeletePost(id))
+            {
+                return InternalServerError();
+            }
+            return Ok();
         }
     }
 }
