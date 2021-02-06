@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace _24Hr.Controllers
 {
-    public class HomeController : ReplyController
+    public class HomeController : Controller
     {
         public ActionResult Index()
         {

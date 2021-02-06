@@ -1,4 +1,5 @@
-﻿using _24Hr.Services;
+﻿using _24Hr.Models;
+using _24Hr.Services;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -8,8 +9,8 @@ using System.Web.Http;
 
 namespace _24Hr.Controllers
 {
-    public class ReplyController
-    {
+    
+    
         [Authorize]
         public class ReplyController : ApiController
         {
@@ -21,10 +22,29 @@ namespace _24Hr.Controllers
             }
             public IHttpActionResult Get()
             {
-                ReplyService noteService = ReplyNoteService();
-                var notes = noteService.GetNotes();
-                return Ok(notes);
+                ReplyService replyService = CreateReplyService();
+                var reply = replyService.GetNotes();
+                return Ok(reply);
             }
+
+        public IHttpActionResult Post(ReplyCreate reply)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var service = CreateReplyService();
+
+            if (!service.CreateReply(reply))
+                return InternalServerError();
+
+            return Ok();
+        }
+        private ReplyService CreateNoteService()
+        {
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var noteService = new ReplyService(userId);
+            return noteService;
         }
     }
+    
 }
