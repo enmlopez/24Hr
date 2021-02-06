@@ -21,6 +21,11 @@ namespace _24Hr.Data
 
         [ForeignKey(nameof(Comment))]
         public int CommentId { get; set; }
+     
         public virtual Comment Comment { get; set; }
+        [Required]
+        public DateTimeOffset CreatedUtc { get; set; }
+        [Required]
+        public DateTimeOffset? ModifiedUtc { get; set; }
     }
 }
