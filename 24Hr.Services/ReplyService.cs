@@ -22,7 +22,7 @@ namespace _24Hr.Services
                 {
                     Author = _authorId,
                     Text = model.Text,
-
+                    CommentId=model.CommentId,
                     CreatedUtc = DateTimeOffset.Now
                 };
 
