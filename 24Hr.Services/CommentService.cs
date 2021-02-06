@@ -11,22 +11,19 @@ namespace _24Hr.Services
     public class CommentService
     {
         private readonly Guid _userId;
-        private PostService postService;
+      
 
         public CommentService(Guid userId)
         {
             _userId = userId;
-            postService = new PostService(userId);
+           
         }
 
 
          
         public bool CreateComment(CommentCreate model)
         {
-            var post = postService.GetPostById(model.PostID);
-
-            if (post is null)
-                return false;
+           
 
             var entity =
                 new Comment()
