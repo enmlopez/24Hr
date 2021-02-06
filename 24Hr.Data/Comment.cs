@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -23,6 +24,7 @@ namespace _24Hr.Data
         public int PostId { get; set; }
         public virtual Post Post { get; set; }
 
+        [JsonIgnore]
         public virtual List<Reply> Reply { get; set; }
     }
 }
