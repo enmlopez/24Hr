@@ -21,9 +21,16 @@ namespace _24Hr.Data
         public Guid Author { get; set; }
 
         [ForeignKey(nameof(Comment))]
+
+   
         public int? CommentId { get; set; }
          
         [JsonIgnore]
+
         public virtual Comment Comment { get; set; }
+        [Required]
+        public DateTimeOffset CreatedUtc { get; set; }
+        
+        public DateTimeOffset? ModifiedUtc { get; set; }
     }
 }
