@@ -41,6 +41,7 @@ namespace _24Hr.Controllers
             }
             return Ok();
         }
+
         [HttpGet]
         public IHttpActionResult Get(int id)
         {
